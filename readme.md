@@ -18,11 +18,12 @@
 ## Criação de Pastas e Arquivos
 1. Criar uma pasta `routes` dentro da pasta `src`.
 2. Adicionar arquivos `(nome do arquivo).routes.js` dentro da pasta `routes`.
+    Cada um desses arquivos serve para criar a lógica das rotas de requisição do usuário.
 3. Adicionar arquivos `(nome do arquivo).js` na pasta models.
     Esse arquivo é uma representação da tabela em seu banco de dados.
 4. Criar uma pasta `middlewares` dentro da pasta `src`.
-5. Adicionar arquivos `(nome do arquivo).js` dentro da pasta `middlewares`
-    Esse arquivo serve para fazer validação nas rotas
+5. Adicionar arquivos `(nome do arquivo).js` dentro da pasta `middlewares`.
+    Esses arquivos servem para fazer as validações nas rotas, garantir as regras de negócio e ajudar na lógica.
 6. Criar arquivos `Nome.js`, na pasta models, com a primeira letra maiúscula.
     Esses arquivos servem para definir os modelos de dados, representando as tabelas do banco de dados e suas relações.
 7. Criar a pasta `controllers` dentro da pasta `src`.
