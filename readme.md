@@ -1,19 +1,26 @@
 ## Rodar o repositório:
 
 ### Na primeira vez é necessário instalar as dependencias:
-1. `npm install` na pasta raiz
-2. Se for em ambiente local: `npm install --dev` na pasta raiz
-3. `npm install jsonwebtoken` na pasta raiz  - para utilizar as validações JWT
-4. `npm install bcryptjs` na pasta raiz - para criptografar as senhas dos usuários nas tabelas
-5. Criar arquivo `.env`
-6. Atualizar arquivo `.env_example` conforme desejar.
-7. `cp .env_example .env` na pasta raiz
+1. `npm install` - na pasta raiz
+2. Se for em ambiente local: `npm install --dev` - na pasta raiz
+3. `npm install jsonwebtoken` - na pasta raiz  - para utilizar as validações JWT
+4. `npm install bcryptjs`  - na pasta raiz - para criptografar as senhas dos usuários nas tabelas
+5. Atualizar arquivo `.env_example` conforme necessário para fazer a integração com o arquivo `.env` que será criado.
+6. `cp .env_example .env` na pasta raiz
 
 ### Para rodar o repositório em ambiente local
 1. `npm run start:dev`
 
 ### Abrir um novo terminal e criar as migrations
 1. `npx sequelize-cli migration:generate --name nome_tabela`
+
+## Expecificação das Branches
+### main
+Esta é a branch principal do projeto, a branch de produção.
+### develop
+Esta é a branch de desenvolvimento
+### features
+Estas branches são utilizadas para adicionar novas tarefas e funcionalidades ao código.
 
 ## Criação de Pastas e Arquivos
 1. Criar uma pasta `routes` dentro da pasta `src`.
