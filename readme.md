@@ -13,14 +13,16 @@
 
 ### Abrir um novo terminal e criar as migrations
 1. `npx sequelize-cli migration:generate --name nome_tabela`
+### Integrar as migrations ao banco de dados
+1. `npx sequelize db:migrate`
 
 ## Expecificação das Branches
-### branch main
+### branch - main
 Esta é a branch principal do projeto, a branch de produção.
-### branch develop
-Esta é a branch de desenvolvimento
-### branch features
-Estas branches são utilizadas para adicionar novas tarefas e funcionalidades ao código.
+### branch - develop
+Esta branch foi utilizada como a branch de desenvolvimento
+### branch - features
+Estas branches serão utilizadas para adicionar novas tarefas e funcionalidades ao código.
 
 ## Criação de Pastas e Arquivos
 1. Criar uma pasta `routes` dentro da pasta `src`.
