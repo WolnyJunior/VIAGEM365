@@ -1,3 +1,17 @@
+## Sobre  o projeto
+### Nome do software
+Adventure-Driven Developer - Uma alusão ao POO
+### Resumo
+Para a galera que curte aquela TRIP, o software proposto é uma plataforma de gestão de viagens, permitindo aos usuários cadastrarem destinos, compartilharem comentários e avaliações. Com intúito de ajudar na criação de uma comunidade onde viajantes possam divulgar suas experiências. Utiliza a autenticação JWT para a segurança, o sistema gerencia o cadastro de usuários, locais de viagem e seus detalhes. Além disso, oferece funcionalidades para listagem, edição e exclusão de destinos de forma segura e personalizada para cada usuário. Com documentação detalhada e integração com o Swagger, o software simplifica a organização e compartilhamento de informações de viagens.
+
+### Melhorias e funcionalidades futuras
+Adicionar um sistema de classificação, para que outros usuários comentem e possar dar notas de 1 até 5.
+Fazer a conexão direta lugares regionais pouco divulgados como pousadas, hostels, campings.
+Poder adicionar amigos, e criar um chat entre eles.
+Enfim, transformar em uma rede social destinada somente para quem curte aquela trip, seja ela, longa de férias ou aquele bate e volta.
+
+## Techs utilizadas
+[![My Skills](https://skillicons.dev/icons?i=nodejs,postgresql,express,postman,sequelize,vscode,git,github,swagger)](https://skillicons.dev)
 ## Rodar o repositório:
 
 ### Na primeira vez é necessário instalar as dependencias:
