@@ -15,11 +15,11 @@
 1. `npx sequelize-cli migration:generate --name nome_tabela`
 
 ## Expecificação das Branches
-### main
+### branch main
 Esta é a branch principal do projeto, a branch de produção.
-### develop
+### branch develop
 Esta é a branch de desenvolvimento
-### features
+### branch features
 Estas branches são utilizadas para adicionar novas tarefas e funcionalidades ao código.
 
 ## Criação de Pastas e Arquivos
