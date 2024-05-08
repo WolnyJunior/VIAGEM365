@@ -11,7 +11,7 @@ Poder adicionar amigos, e criar um chat entre eles.
 Enfim, transformar em uma rede social destinada somente para quem curte aquela trip, seja ela, longa de férias ou aquele bate e volta.
 
 ## Techs utilizadas
-[![My Skills](https://skillicons.dev/icons?i=nodejs,postgresql,express,postman,sequelize,vscode,git,github,swagger)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=nodejs,postgresql,express,postman,sequelize,vscode,git,github,npm)](https://skillicons.dev)
 ## Rodar o repositório:
 
 ### Na primeira vez é necessário instalar as dependencias:
