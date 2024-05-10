@@ -15,7 +15,8 @@ const Destino = connection.define('destinos', {
     localidade: {
         type: DataTypes.STRING
     },
-    coordenadas_geograficas: {
+    cep_endereco: {
         type: DataTypes.STRING
     }
+
 })

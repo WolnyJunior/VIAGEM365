@@ -20,8 +20,8 @@ const Usuario = connection.define('usuarios', {
     data_nascimento: {
         type: DataTypes.DATE
     },
-    endereco: {
-        type: DataTypes.INTEGER
+    cep_endereco: {
+        type: DataTypes.STRING
     }
 })
 
