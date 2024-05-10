@@ -1,34 +1,8 @@
 const { Router } = require("express");
 const Usuario = require("../models/Usuario");
 const { sign } = require("jsonwebtoken");
-const { default: axios } = require("axios");
 
 const rotaLogin = new Router()
-
-rotaLogin.get('/:cep', async (req, res) => {
-    try {
-        const cep = req.params.cep
-
-        // const resultado = await axios.get(`https://nominatim.openstreetmap.org/search.php?country=br&postalcode=${cep}&format=jsonv2`)
-
-        // const dadosEndereco = resultado.data.map(item => ({
-        //     latitude: item.lat,
-        //     longitude: item.lon,
-        //     cep: cep,
-        // }))
-
-        const endereco = await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
-
-        const dadosEndereco = {
-            cep: endereco.data.cep,
-            rua: endereco.data.logradouro
-        }
-
-        res.status(200).json(dadosEndereco)
-    } catch (error) {
-        res.json({ error })
-    }
-})
 
 rotaLogin.post('/', async (req, res) => {
     try {
