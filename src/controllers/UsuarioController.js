@@ -7,50 +7,78 @@ class UsuarioController {
         res.json(usuarios)
     }
 
-    async cadastrar(req, res) {
+    async atualizar(req, res) {
         try {
-            const nome = req.body.nome
-            const sexo = req.body.sexo
-            const cpf = req.body.cpf
-            const email = req.body.email
-            const senha = req.body.senha
-            const data_nascimento = req.body.data_nascimento
-            const cep_endereco = req.body.cep_endereco
+            const { id } = req.params
 
-            if (!nome || !sexo || !cpf || !email || !senha || !data_nascimento || !cep_endereco) {
-                return res.status(400).json({ message: `Necessário preencher todos os dados.` })
-            }
-            if (!data_nascimento.match(/\d{4}-\d{2}-\d{2}/gm)) {
-                return res.status(400).json({ message: 'A data de nascimento é não está no formato correto' })
+            const usuario = await Usuario.findByPk(id)
+            if (!usuario) {
+                return res.status(404).json({ message: `Usuário não encontrado com id:${id}.` })
             }
 
-            //variável para fazer uma requisição na API viaCep com o CEP digitado durante o cadastro do usuário.
-            const endereco = await axios.get(`https://viacep.com.br/ws/${cep_endereco}/json/`)
-       
-            //variáveis que retornam da API viaCEP os dados desejados
-            const rua = endereco.data.logradouro
-            const bairro = endereco.data.bairro
-            const cidade = endereco.data.localidade
-            const estado = endereco.data.uf
+            console.log(req.body)
 
-            const usuario = await Usuario.create({
-                nome: nome,
-                sexo: sexo,
-                cpf: cpf,
-                email: email,
-                senha: senha,
-                data_nascimento: data_nascimento,
-                cep_endereco: cep_endereco,
-                rua: rua,
-                bairro: bairro,
-                cidade: cidade,
-                estado: estado
-            })
+            usuario.update(req.body)
 
-            res.status(201).json(usuario)
+            await usuario.save()
+
+            res.json(usuario)
+
         } catch (error) {
             console.log(error)
-            res.status(500).json({ error: `Erro ao criar novo usuário.` })
+            res.status(500).json({ error: `Erro ao atualizar usuário.` })
+        }
+    }
+
+    async atualizarCep(req, res) {
+        try {
+            const { id } = req.params;
+            let usuario = await Usuario.findByPk(id);
+
+            if (!usuario) {
+                return res.status(404).json({ message: `Usuário não encontrado com id:${id}.` });
+            }
+
+            const { cep_endereco } = req.body;
+            const enderecoResponse = await axios.get(`https://viacep.com.br/ws/${cep_endereco}/json/`);
+
+            if (enderecoResponse.status !== 200) {
+                return res.status(400).json({ message: 'CEP inválido ou não encontrado' });
+            }
+
+            const endereco = enderecoResponse.data;
+
+            // Atualiza os dados do usuário com as informações do endereço
+            usuario = await usuario.update({
+                ...req.body,
+                rua: endereco.logradouro,
+                bairro: endereco.bairro,
+                cidade: endereco.localidade,
+                estado: endereco.uf
+            });
+
+            res.json(usuario);
+        } catch (error) {
+            res.status(500).json({ error: `Erro ao atualizar usuário.` });
+        }
+    }
+
+    async deletar(req, res) {
+        try {
+            const { id } = req.params
+
+            const usuarioDeletado = await Usuario.destroy({
+                where: { id: id }
+            })
+
+            if (usuarioDeletado === 0) {
+                return res.status(404).json({ message: `Nenhum usuário encontrado com id:${id}` })
+            }
+
+            res.status(204).json({})
+
+        } catch (error) {
+            res.status(500).json({ error: 'Não foi possível deletar usuário' })
         }
     }
 }
