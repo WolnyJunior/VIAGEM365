@@ -1,5 +1,6 @@
 const { default: axios } = require("axios");
-const Destino = require("../models/Destino")
+const Destino = require("../models/Destino");
+const buscaCepDestino = require("../services/buscaCepDestino");
 
 class DestinoController {
     async listar(req, res) {
@@ -25,10 +26,14 @@ class DestinoController {
                 return res.status(400).json({ message: `Necessário preencher todos os dados:\nid_usuario;\nnome;\ndescricao;\ncep_endereco.` })
             }
 
-            const resultado = await axios.get(`https://nominatim.openstreetmap.org/search.php?country=br&postalcode=${cep_endereco}&format=jsonv2`)
-
-            const { lat, lon, display_name } = resultado.data[0]
-
+            //Buscar um CEP válido para adicionar latitude, longitude e localidade ao criar um novo Destino
+            let resultado;
+            try {
+                resultado = await buscaCepDestino(cep_endereco)
+            } catch (error) {
+                return res.status(400).json({ message: `${error.message}` });
+            }
+            const { lat, lon, display_name } = resultado
             const destino = await Destino.create({
                 id_usuario: id_usuario,
                 nome: nome,
@@ -55,14 +60,14 @@ class DestinoController {
                 return res.status(404).json({ message: `Destino não encontrado com id:${id}.` });
             }
 
+            //Buscar um CEP válido para retornar na atualização de destino
             const { cep_endereco } = req.body;
-            const resultado = await axios.get(`https://nominatim.openstreetmap.org/search.php?country=br&postalcode=${cep_endereco}&format=jsonv2`);
-
-            if (resultado.status !== 200) {
-                return res.status(400).json({ message: 'CEP inválido ou não encontrado' });
+            let resultado;
+            try {
+                resultado = await buscaCepDestino(cep_endereco)
+            } catch (error) {
+                return res.status(400).json({ message: `Não foi possível atualizar destino. ${error.message}.` });
             }
-
-            const { lat, lon, display_name } = resultado.data[0]
 
             // Atualiza os dados do usuário com as informações do endereço
             destino = await destino.update({
@@ -71,12 +76,12 @@ class DestinoController {
                 latitude: lat,
                 longitude: lon
             });
-
             await destino.save()
 
             res.json(destino);
         } catch (error) {
-            res.status(500).json({ error: `Erro ao atualizar usuário.` });
+            console.log(error)
+            res.status(500).json({ error});
         }
     }
 
