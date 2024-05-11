@@ -57,6 +57,8 @@ class UsuarioController {
                 estado: endereco.uf
             });
 
+            await usuario.save()
+
             res.json(usuario);
         } catch (error) {
             res.status(500).json({ error: `Erro ao atualizar usuário.` });
