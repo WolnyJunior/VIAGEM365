@@ -22,6 +22,18 @@ const Usuario = connection.define('usuarios', {
     },
     cep_endereco: {
         type: DataTypes.STRING
+    },
+    rua: {
+        type: DataTypes.STRING
+    },
+    bairro: {
+        type: DataTypes.STRING
+    },
+    cidade: {
+        type: DataTypes.STRING
+    },
+    estado: {
+        type: DataTypes.STRING
     }
 })
 

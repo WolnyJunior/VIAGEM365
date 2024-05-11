@@ -7,16 +7,6 @@ class UsuarioController {
         res.json(usuarios)
     }
 
-    async buscarDadosEndereco(cep) {
-        try {
-            const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
-            return response.data;
-        } catch (error) {
-            console.error('Erro ao buscar dados do endereço:', error);
-            return null;
-        }
-    }
-
     async cadastrar(req, res) {
         try {
             const nome = req.body.nome
@@ -34,8 +24,14 @@ class UsuarioController {
                 return res.status(400).json({ message: 'A data de nascimento é não está no formato correto' })
             }
 
+            //variável para fazer uma requisição na API viaCep com o CEP digitado durante o cadastro do usuário.
             const endereco = await axios.get(`https://viacep.com.br/ws/${cep_endereco}/json/`)
-            const cep = 'RUA: ' + endereco.data.logradouro + '. BAIRRO: ' + endereco.data.bairro + ' .CIDADE: ' + endereco.data.localidade
+       
+            //variáveis que retornam da API viaCEP os dados desejados
+            const rua = endereco.data.logradouro
+            const bairro = endereco.data.bairro
+            const cidade = endereco.data.localidade
+            const estado = endereco.data.uf
 
             const usuario = await Usuario.create({
                 nome: nome,
@@ -44,7 +40,11 @@ class UsuarioController {
                 email: email,
                 senha: senha,
                 data_nascimento: data_nascimento,
-                cep_endereco: cep,
+                cep_endereco: cep_endereco,
+                rua: rua,
+                bairro: bairro,
+                cidade: cidade,
+                estado: estado
             })
 
             res.status(201).json(usuario)
@@ -53,7 +53,6 @@ class UsuarioController {
             res.status(500).json({ error: `Erro ao criar novo usuário.` })
         }
     }
-
 }
 
 module.exports = new UsuarioController()
