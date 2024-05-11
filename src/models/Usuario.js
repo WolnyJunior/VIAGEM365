@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const { connection } = require('../database/connection')
+const { connection } = require('../database/connection');
 
 const Usuario = connection.define('usuarios', {
     nome: {
@@ -22,7 +22,24 @@ const Usuario = connection.define('usuarios', {
     },
     cep_endereco: {
         type: DataTypes.STRING
+    },
+    rua: {
+        type: DataTypes.STRING
+    },
+    bairro: {
+        type: DataTypes.STRING
+    },
+    cidade: {
+        type: DataTypes.STRING
+    },
+    estado: {
+        type: DataTypes.STRING
     }
 })
+
+// Usuario.beforeSave(async (usuario) => {
+//     usuario.rua = await axios.get(`https://viacep.com.br/ws/${cep_endereco}/json/`)
+//     return usuario
+// })
 
 module.exports = Usuario
