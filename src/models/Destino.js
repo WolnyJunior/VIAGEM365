@@ -1,7 +1,6 @@
 const { DataTypes } = require("sequelize");
 const { connection } = require("../database/connection");
 
-
 const Destino = connection.define('destinos', {
     id_usuario: {
         type: DataTypes.INTEGER
@@ -17,6 +16,13 @@ const Destino = connection.define('destinos', {
     },
     cep_endereco: {
         type: DataTypes.STRING
+    },
+    latitude: {
+        type: DataTypes.STRING
+    },
+    longitude: {
+        type: DataTypes.STRING
     }
-
 })
+
+module.exports = Destino
