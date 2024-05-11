@@ -37,9 +37,4 @@ const Usuario = connection.define('usuarios', {
     }
 })
 
-// Usuario.beforeSave(async (usuario) => {
-//     usuario.rua = await axios.get(`https://viacep.com.br/ws/${cep_endereco}/json/`)
-//     return usuario
-// })
-
 module.exports = Usuario
