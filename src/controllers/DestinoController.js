@@ -5,7 +5,8 @@ const buscaCepDestino = require("../services/buscaCepDestino");
 class DestinoController {
     async listar(req, res) {
         try {
-            const destinos = await Destino.findAll()
+            const id_usuario = req.query.id_usuario
+            const destinos = await Destino.findAll({ where: { id_usuario: id_usuario } })
             if (destinos.length === 0) {
                 return res.status(404).json({ message: "Nenhum destino encontrado." });
             }
@@ -81,7 +82,7 @@ class DestinoController {
             res.json(destino);
         } catch (error) {
             console.log(error)
-            res.status(500).json({ error});
+            res.status(500).json({ error });
         }
     }
 
