@@ -1,10 +1,11 @@
 const { Router } = require("express");
 const LoginController = require("../controllers/LoginController");
+const verificarEmailCPF = require("../middlewares/verificarEmailCPF");
 
-const rotaLogin = new Router()
+const loginRoutes = new Router()
 
-rotaLogin.post('/', LoginController.login)
-rotaLogin.post('/cadastro', LoginController.cadastrar)
+loginRoutes.post('/', LoginController.login)
+loginRoutes.post('/cadastro', verificarEmailCPF, LoginController.cadastrar)
 
 
-module.exports = rotaLogin
+module.exports = loginRoutes
