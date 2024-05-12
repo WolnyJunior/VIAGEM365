@@ -19,6 +19,9 @@ Enfim, transformar em uma rede social destinada somente para quem curte aquela t
 2. Se for em ambiente local: `npm install --dev` - na pasta raiz
 3. `npm install jsonwebtoken` - na pasta raiz  - para utilizar as validações JWT
 4. `npm install bcryptjs`  - na pasta raiz - para criptografar as senhas dos usuários nas tabelas
+5. `npm install axios` - na pasta raiz - para fazer requisições de APIs.
+6. `npm install swagger-ui-express` - na pasta raiz - serve para criar a tela de interface
+7. `npm install swagger-autogen` -na pasta raiz - serve para gerar o documento do swagger
 5. Atualizar arquivo `.env_example` conforme necessário para fazer a integração com o arquivo `.env` que será criado.
 6. `cp .env_example .env` na pasta raiz
 
