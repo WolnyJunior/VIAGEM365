@@ -24,11 +24,11 @@ class LoginController {
                 return res.status(404).json({ message: `Usuário não encontrado. Email e/ou senha Incorreto(s)` })
             }
 
-            const payload = { sub: usuario.id, email: usuario.id, nome: usuario.id }
+            const payload = { sub: usuario.id, id: usuario.id, email: usuario.id, nome: usuario.id }
 
             const token = sign(payload, process.env.SECRET_JWT)
 
-            res.status(200).json({ Token: token })
+            res.status(200).json({ Token: token, id: usuario.id, nome: usuario.id })
         } catch (error) {
             return res.status(500).json({ error: error, message: 'Erro ao fazer o login!' })
         }
