@@ -2,16 +2,16 @@ const { verify } = require("jsonwebtoken");
 const Usuario = require("../models/Usuario");
 
 //Verificar a autenticidade do Token informado
-async function auth(req, res, next) {
+async function authDestinos(req, res, next) {
     try {
         const { authorization } = req.headers
 
         const decoded = verify(authorization, process.env.SECRET_JWT);
         const usuario = await Usuario.findByPk(decoded.sub);
-        if(!usuario){
-            return res.status(404).json({message:`Não foi possível encontrar o usuário com ID informado.`})
+        if (!usuario) {
+            return res.status(404).json({ message: `Não foi possível encontrar o usuário com ID informado.` })
         }
-        req.usuario = usuario
+        req.id_usuario = usuario.id
         next()
 
     } catch (error) {
@@ -22,4 +22,4 @@ async function auth(req, res, next) {
     }
 }
 
-module.exports = { auth }
+module.exports = { authDestinos }

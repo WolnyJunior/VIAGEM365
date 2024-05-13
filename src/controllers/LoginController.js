@@ -28,7 +28,7 @@ class LoginController {
 
             const token = sign(payload, process.env.SECRET_JWT)
 
-            res.status(200).json({ token: token, id: usuario.id, nome: usuario.nome })
+            res.status(200).json({ token: token, id: usuario.id, nome: usuario.nome, email: usuario.email })
         } catch (error) {
             return res.status(500).json({ error: error, message: 'Erro ao fazer o login!' })
         }

@@ -6,9 +6,14 @@ Para a galera que curte aquela TRIP, o software proposto é uma plataforma de ge
 
 ### Melhorias e funcionalidades futuras
 Adicionar um sistema de classificação, para que outros usuários comentem e possar dar notas de 1 até 5.
+
 Fazer a conexão direta lugares regionais pouco divulgados como pousadas, hostels, campings.
+
 Poder adicionar amigos, e criar um chat entre eles.
+
 Enfim, transformar em uma rede social destinada somente para quem curte aquela trip, seja ela, longa de férias ou aquele bate e volta.
+
+O `middleware` verificarEmailCPF, funciona bem em cadastrar usuário, porém, para atualizar, seria interessante colocar um que permita manter igual o email do usuária que está sendo modificado. Pois ele faz a verificação e não deixa usar um email que já foi cadastrado.
 
 ## Techs utilizadas
 [![My Skills](https://skillicons.dev/icons?i=nodejs,postgresql,express,postman,sequelize,vscode,git,github,npm)](https://skillicons.dev)

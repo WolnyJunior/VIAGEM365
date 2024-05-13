@@ -6,12 +6,13 @@ const buscaCepDestino = require("../services/buscaCepDestino");
 class DestinoController {
     async listar(req, res) {
         try {
-            const destinos = await Destino.findAll({ where: { id_usuario: req.id_usuario } })
+            const destinos = await Destino.findAll({ where: { id_usuario: req.usuario.id } })
             if (destinos.length === 0) {
                 return res.status(404).json({ message: "Nenhum destino encontrado." });
             }
             res.json(destinos)
         } catch (error) {
+            console.log(error)
             res.status(500).json({ error: "Ocorreu um erro ao listar destinos." });
         }
     }
@@ -62,6 +63,10 @@ class DestinoController {
                 return res.status(404).json({ message: `Destino não encontrado com id:${id}.` });
             }
 
+            if (destino.id_usuario !== req.id_usuario) {
+                return res.status(403).json({ message: `Esse destino não pertence a você, então, não tem permissão para atualizar os dados no destino com id:${id}.` })
+            }
+
             //Buscar um CEP válido para retornar na atualização de destino
             const { cep_endereco } = req.body;
             let resultado;
@@ -72,7 +77,7 @@ class DestinoController {
             }
 
             const { display_name, lat, lon } = resultado;
-            
+
             // Atualiza os dados do usuário com as informações do endereço
             destino = await destino.update({
                 ...req.body,
@@ -94,6 +99,12 @@ class DestinoController {
         try {
             const { id } = req.params
 
+            let destino = await Destino.findByPk(id);
+
+            if (destino.id_usuario !== req.id_usuario) {
+                return res.status(403).json({ message: `Esse destino não pertence a você. Você não tem permissão para deletar o destino com id:${id}.` })
+            }
+
             const destinoDeletado = await Destino.destroy({
                 where: { id: id }
             })
@@ -105,7 +116,8 @@ class DestinoController {
             res.status(204).json({})
 
         } catch (error) {
-            res.status(500).json({ error: 'Não foi possível deletar usuário' })
+            console.log(error)
+            res.status(500).json({ error: 'Não foi possível deletar destino' })
         }
     }
 
