@@ -2,6 +2,9 @@ const { DataTypes } = require("sequelize");
 const { connection } = require('../database/connection');
 
 const Usuario = connection.define('usuarios', {
+    isAdmin:{
+        type:DataTypes.BOOLEAN
+    },
     nome: {
         type: DataTypes.STRING
     },
