@@ -1,12 +1,12 @@
 const { default: axios } = require("axios");
 const Destino = require("../models/Destino");
+const auth = require('../middlewares/auth')
 const buscaCepDestino = require("../services/buscaCepDestino");
 
 class DestinoController {
     async listar(req, res) {
         try {
-            const id_usuario = req.query.id_usuario
-            const destinos = await Destino.findAll({ where: { id_usuario: id_usuario } })
+            const destinos = await Destino.findAll({ where: { id_usuario: req.id_usuario } })
             if (destinos.length === 0) {
                 return res.status(404).json({ message: "Nenhum destino encontrado." });
             }
@@ -48,6 +48,7 @@ class DestinoController {
             res.status(201).json(destino)
 
         } catch (error) {
+            console.log(error)
             res.status(500).json({ error: `Erro ao criar novo destino.` })
         }
     }
@@ -70,6 +71,8 @@ class DestinoController {
                 return res.status(400).json({ message: `Não foi possível atualizar destino. ${error.message}.` });
             }
 
+            const { display_name, lat, lon } = resultado;
+            
             // Atualiza os dados do usuário com as informações do endereço
             destino = await destino.update({
                 ...req.body,
