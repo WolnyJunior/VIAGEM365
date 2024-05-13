@@ -10,16 +10,19 @@ class UsuarioController {
     async atualizar(req, res) {
         try {
             const { id } = req.params
+            
+            const { isAdmin } = req.usuario
+            if (!isAdmin) {
+                return res.status(403).json({ message: `Este usuário não é um Admin, e não tem permissão para atualizar usuários.` })
+            }
 
             const usuario = await Usuario.findByPk(id)
             if (!usuario) {
                 return res.status(404).json({ message: `Usuário não encontrado com id:${id}.` })
             }
 
-            console.log(req.body)
-
-            usuario.update(req.body)
-
+            // console.log(req.body)
+            await usuario.update(req.body)
             await usuario.save()
 
             res.json(usuario)
@@ -33,6 +36,11 @@ class UsuarioController {
     async atualizarCep(req, res) {
         try {
             const { id } = req.params;
+            const { isAdmin } = req.usuario
+            if (!isAdmin) {
+                return res.status(403).json({ message: `Este usuário não é um Admin, e não tem permissão para atualizar usuários.` })
+            }
+
             let usuario = await Usuario.findByPk(id);
 
             if (!usuario) {
@@ -47,7 +55,6 @@ class UsuarioController {
             }
 
             const endereco = enderecoResponse.data;
-
             // Atualiza os dados do usuário com as informações do endereço
             usuario = await usuario.update({
                 ...req.body,
@@ -68,6 +75,14 @@ class UsuarioController {
     async deletar(req, res) {
         try {
             const { id } = req.params
+            const { isAdmin } = req.usuario 
+            if (!isAdmin) {
+                return res.status(403).json({ message: `Este usuário não é um Admin, e não tem permissão para deletar usuários.` })
+            }
+
+            if (id === '1') {
+                return res.status(403).json({ message: `O usuário admin não pode ser excluído.` });
+            }
 
             const usuarioDeletado = await Usuario.destroy({
                 where: { id: id }
@@ -80,6 +95,7 @@ class UsuarioController {
             res.status(204).json({})
 
         } catch (error) {
+            console.log(error)
             res.status(500).json({ error: 'Não foi possível deletar usuário' })
         }
     }
