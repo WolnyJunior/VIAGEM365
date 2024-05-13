@@ -1,11 +1,15 @@
 const { Router } = require("express");
 const UsuarioController = require("../controllers/UsuarioController");
+const verificarDestinoDoUsuario = require("../middlewares/verificarDestinoDoUsuario");
+const { auth } = require("../middlewares/auth");
+const verificarEmailCPF = require("../middlewares/verificarEmailCPF");
+const verficarPermissao = require("../middlewares/verificarPermissao");
 
 const usuarioRoutes = new Router()
 
-usuarioRoutes.get('/', UsuarioController.listar)
-usuarioRoutes.put('/:id', UsuarioController.atualizar)
-usuarioRoutes.patch('/:id', UsuarioController.atualizarCep)
-usuarioRoutes.delete('/:id', UsuarioController.deletar)
+usuarioRoutes.get('/', auth, UsuarioController.listar)
+usuarioRoutes.put('/:id', auth, verificarEmailCPF, UsuarioController.atualizar)
+usuarioRoutes.patch('/:id', auth, verficarPermissao, UsuarioController.atualizarCep)
+usuarioRoutes.delete('/:id', auth, verificarDestinoDoUsuario, UsuarioController.deletar)
 
 module.exports = usuarioRoutes
