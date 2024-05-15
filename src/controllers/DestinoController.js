@@ -4,7 +4,10 @@ const auth = require('../middlewares/auth')
 const buscaCepDestino = require("../services/buscaCepDestino");
 
 class DestinoController {
+
     async listar(req, res) {
+        // #swagger.tags = ['Destinos']
+
         try {
             const destinos = await Destino.findAll({ where: { id_usuario: req.usuario.id } })
             if (destinos.length === 0) {
@@ -13,11 +16,23 @@ class DestinoController {
             res.json(destinos)
         } catch (error) {
             console.log(error)
-            res.status(500).json({ error: "Ocorreu um erro ao listar destinos." });
+            res.status(500).json({ error: "Infelizmente ocorreu um erro ao listar destinos do usuário.." });
         }
     }
 
     async cadastrar(req, res) {
+        // #swagger.tags = ['Destinos']
+        /*  #swagger.parameters['cadastro'] = {
+                    in: 'body',
+                    description: 'Rota de cadastro de destinos',
+                    schema:{
+                        "id_usuario":5,
+                        "nome":"OUTRO DESTINO",
+                        "descricao":"DESCRIÇÃO DA LOCALIDADE",
+                        "cep_endereco":"93819-700"
+                    }
+                }
+        */
         try {
             const id_usuario = req.body.id_usuario
             const nome = req.body.nome
@@ -55,6 +70,17 @@ class DestinoController {
     }
 
     async atualizar(req, res) {
+        // #swagger.tags = ['Destinos']
+        /*  #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Para atualização do Destino - deve informar o ID. E Destino deve pertencer ao usuário logado/autenticado.',
+            schema: {
+                "nome": "Plinio Brasil Milano",
+                "descricao": "Avenida de Porto Alegre",
+                "cep_endereco": "58414-500"
+            }
+    } */
+
         try {
             const { id } = req.params;
             let destino = await Destino.findByPk(id);
@@ -63,7 +89,7 @@ class DestinoController {
                 return res.status(404).json({ message: `Destino não encontrado com id:${id}.` });
             }
 
-            if (destino.id_usuario !== req.id_usuario) {
+            if (destino.id_usuario !== req.usuario.id) {
                 return res.status(403).json({ message: `Esse destino não pertence a você, então, não tem permissão para atualizar os dados no destino com id:${id}.` })
             }
 
@@ -96,12 +122,13 @@ class DestinoController {
 
 
     async deletar(req, res) {
+        // #swagger.tags = ['Destinos']
         try {
             const { id } = req.params
 
             let destino = await Destino.findByPk(id);
 
-            if (destino.id_usuario !== req.id_usuario) {
+            if (destino.id_usuario !== req.usuario.id) {
                 return res.status(403).json({ message: `Esse destino não pertence a você. Você não tem permissão para deletar o destino com id:${id}.` })
             }
 

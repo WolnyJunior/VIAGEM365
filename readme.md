@@ -25,10 +25,8 @@ O `middleware` verificarEmailCPF, funciona bem em cadastrar usuário, porém, pa
 3. `npm install jsonwebtoken` - na pasta raiz  - para utilizar as validações JWT
 4. `npm install bcryptjs`  - na pasta raiz - para criptografar as senhas dos usuários nas tabelas
 5. `npm install axios` - na pasta raiz - para fazer requisições de APIs.
-6. `npm install swagger-ui-express` - na pasta raiz - serve para criar a tela de interface
-7. `npm install swagger-autogen` -na pasta raiz - serve para gerar o documento do swagger
-5. Atualizar arquivo `.env_example` conforme necessário para fazer a integração com o arquivo `.env` que será criado.
-6. `cp .env_example .env` na pasta raiz
+6. Atualizar arquivo `.env_example` conforme necessário para fazer a integração com o arquivo `.env` que será criado.
+7. `cp .env_example .env` na pasta raiz
 
 ### Para rodar o repositório em ambiente local
 1. `npm run start:dev`
@@ -60,3 +58,11 @@ Estas branches serão utilizadas para adicionar novas tarefas e funcionalidades 
 7. Criar a pasta `controllers` dentro da pasta `src`.
 8. Criar arquivos `NomeDoArquivoController.js` dentro da da pasta `controllers`.
     Esses arquivos servem para definir as funções que controlam as interações com os modelos de dados.
+9. Criar arquivo `swagger.js` na pasta `src`.
+
+### Depois de criar a arquivo `swagger.js` e a lógica de acordo com a documentação:
+1. `npm install swagger-ui-express` - na pasta raiz - serve para criar a tela de interface
+2. `npm install swagger-autogen` -na pasta raiz - serve para gerar o documento do swagger
+
+3. Criar as documentações das rotas para realizar os testes na interface do `Swagger`.
+4. Utilizar a rota http://localhost:3000/docs/, para acessar a documentação de rotas do projeto.

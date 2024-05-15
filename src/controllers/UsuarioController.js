@@ -3,17 +3,32 @@ const Usuario = require("../models/Usuario");
 
 class UsuarioController {
     async listar(req, res) {
+        // #swagger.tags = ['Usuários']
         const usuarios = await Usuario.findAll()
         res.json(usuarios)
     }
 
     async atualizar(req, res) {
+        // #swagger.tags = ['Usuários']
+        /*  #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Para atualização do usuário - deve informar o ID e ter autenticação de ADMIN',
+            schema: {
+                "nome":"Usuario Atualizado",
+                "sexo":"masculino",
+                "cpf":"000.000.000-00",
+                "email":"novoemail@email.com"
+            }
+    } */
         try {
             const { id } = req.params
-            
+
             const { isAdmin } = req.usuario
             if (!isAdmin) {
                 return res.status(403).json({ message: `Este usuário não é um Admin, e não tem permissão para atualizar usuários.` })
+            }
+            if (id === '1') {
+                return res.status(403).json({ message: `O usuário admin não pode ter dados atualizados.` });
             }
 
             const usuario = await Usuario.findByPk(id)
@@ -34,11 +49,22 @@ class UsuarioController {
     }
 
     async atualizarCep(req, res) {
+        // #swagger.tags = ['Usuários']
+        /*  #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Para atualizar do CEP do usuário - deve informar o ID e ter autenticação de ADMIN',
+            schema: {
+                "cep_endereco":"93819-700"
+            }
+        }   */
         try {
             const { id } = req.params;
             const { isAdmin } = req.usuario
             if (!isAdmin) {
                 return res.status(403).json({ message: `Este usuário não é um Admin, e não tem permissão para atualizar usuários.` })
+            }
+            if (id === '1') {
+                return res.status(403).json({ message: `O usuário admin não pode ter CEP atualizado.` });
             }
 
             let usuario = await Usuario.findByPk(id);
@@ -73,9 +99,10 @@ class UsuarioController {
     }
 
     async deletar(req, res) {
+        // #swagger.tags = ['Usuários']
         try {
             const { id } = req.params
-            const { isAdmin } = req.usuario 
+            const { isAdmin } = req.usuario
             if (!isAdmin) {
                 return res.status(403).json({ message: `Este usuário não é um Admin, e não tem permissão para deletar usuários.` })
             }
