@@ -2,6 +2,7 @@
 
 ## Índice
 - [Visão Geral](#visão-geral)
+- [Desenvolvimento](#desenvolvimento)
 - [Melhorias](#melhorias)
 - [Techs Utilizadas](#techs-utilizadas)
 - [Rodar repositório](#rodar-repositório)
@@ -14,24 +15,32 @@
 Adventure-Driven Developer - Uma alusão ao POO
 ### Resumo
 Para a galera que curte aquela TRIP, o software proposto é uma plataforma de gestão de viagens, permitindo aos usuários cadastrarem destinos, compartilharem comentários e avaliações. Com intúito de ajudar na criação de uma comunidade onde viajantes possam divulgar suas experiências. Utiliza a autenticação JWT para a segurança, o sistema gerencia o cadastro de usuários, locais de viagem e seus detalhes. Além disso, oferece funcionalidades para listagem, edição e exclusão de destinos de forma segura e personalizada para cada usuário. Com documentação detalhada e integração com o Swagger, o software simplifica a organização e compartilhamento de informações de viagens.
+<br><br>
+[Índice](#índice)
 
-Na parte de desenvolvimento foram utilizadas duas APIs externas: <a href="https://viacep.com.br/">ViaCEP</a> e <a href="https://nominatim.openstreetmap.org/ui/search.html">OpenStreetMap</a> para fazer a requisições http e buscar os dados de endereço e localização de usuários e destinos.<br>
-O sistema já inicia com o usuário admin 
-Foram implementados middlewares de autenticação e uma lógica para verificar se o usuário autenticado é um admin, que permite fazer o CRUD de usuários. E que não pode ser atualizado ou removido.
+## Desenvolvimento
+- Todo projeto parte do clone sequelize no meu repositório no GitHub: [WolnyJunior/sequelize](https://github.com/WolnyJunior/sequelize)
+- Foram utilizadas duas APIs externas: <a href="https://viacep.com.br/">ViaCEP</a> e <a href="https://nominatim.openstreetmap.org/ui/search.html">OpenStreetMap</a> para fazer as requisições http e buscar os dados de endereço e localização, de usuários e destinos.
+- Foi criado um service para desenvolver a função que faz a requisição através do `axios` na API OpenStreetMap.<br>
+Já a requisição na API ViaCEP é feita dentro da rota para cadastrar o usuário.
+- No arquivo `index.js` foi implementado uma lógica para criar o usuário `admin`. O sistema já inicia com o usuário admin cadastrado, que não pode ser alterado ou removido.<br>
+E, somente o usuário admin pode `Atualizar` e `Deletar` outros usuários.
+- Foi implementado o middleware de autenticação `isAdmin` para verificar se o usuário autenticado é um admin.
+- Os middlewares `auth` e `authDestino` fazem a autenticação JWT, para confirmar se o destino ao qual está fazendo a requisição, pertence ao usuário que está autenticado.
+- O middleware `verificarDestinoDoUsuario` faz verificação para saber se o usuário não contém nenhum destino cadastrado, antes de ser excluído. Caso possua, a requisição `delete` do usuário, retorna `false`.
+- O middleware `verificarEmailCPF` serve para verificar se há duplicidade no email e CPF ao cadastrar e atualizar um usuário.
+- A lógica de programação das `rotas` foram desenvolvidas nos `Controllers`.
+
 <br><br>
 [Índice](#índice)
 
 ## Melhorias
-### Melhorias e funcionalidades futuras
-Adicionar um sistema de classificação, para que outros usuários comentem e possar dar notas de 1 até 5.
-
-Fazer a conexão direta lugares regionais pouco divulgados como pousadas, hostels, campings.
-
-Poder adicionar amigos, e criar um chat entre eles.
-
-Enfim, transformar em uma rede social destinada somente para quem curte aquela trip, seja ela, longa de férias ou aquele bate e volta.
-
-O `middleware` verificarEmailCPF, funciona bem em cadastrar usuário, porém, para atualizar, seria interessante colocar um que permita manter igual o email do usuária que está sendo modificado. Pois ele faz a verificação e não deixa usar um email que já foi cadastrado.<br><br>
+1. Adicionar um sistema de classificação, para que outros usuários comentem e possar dar notas de 1 até 5.
+2. Fazer a conexão direta lugares regionais pouco divulgados como pousadas, hostels, campings.
+3. Poder adicionar amigos, e criar um chat entre eles.
+4. Transformar em uma rede social destinada somente para quem curte aquela trip, seja ela, longa de férias ou aquele bate e volta.
+5. O `middleware` verificarEmailCPF, funciona bem em cadastrar usuário, porém, para atualizar, seria interessante colocar um que permita manter igual o email do usuária que está sendo modificado. Pois ele faz a verificação e não deixa usar um email que já foi cadastrado.
+<br><br>
 [Índice](#índice)
 
 ## Techs utilizadas
@@ -39,7 +48,7 @@ O `middleware` verificarEmailCPF, funciona bem em cadastrar usuário, porém, pa
 [Índice](#índice)
 
 ## Rodar repositório
-### Na primeira vez é necessário instalar as dependencias:
+### É necessário instalar as dependencias:
 1. `npm install` - na pasta raiz
 2. Se for em ambiente local: `npm install --dev` - na pasta raiz
 3. `npm install jsonwebtoken` - na pasta raiz  - para utilizar as validações JWT
@@ -57,11 +66,11 @@ O `middleware` verificarEmailCPF, funciona bem em cadastrar usuário, porém, pa
 [Índice](#índice)
 
 ## Expecificação branches
-### branch - main
+### Branch - main
 Esta é a branch principal do projeto, a branch de produção.
-### branch - develop
+### Branch - develop
 Esta branch foi utilizada como a branch de desenvolvimento
-### branch - features
+### Branch - feature
 Estas branches serão utilizadas para adicionar novas tarefas e funcionalidades ao código.<br><br>
 [Índice](#índice)
 
