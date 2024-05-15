@@ -1,7 +1,10 @@
 const { DataTypes } = require("sequelize");
-const { connection } = require('../database/connection')
+const { connection } = require('../database/connection');
 
 const Usuario = connection.define('usuarios', {
+    isAdmin:{
+        type:DataTypes.BOOLEAN
+    },
     nome: {
         type: DataTypes.STRING
     },
@@ -21,6 +24,18 @@ const Usuario = connection.define('usuarios', {
         type: DataTypes.DATE
     },
     cep_endereco: {
+        type: DataTypes.STRING
+    },
+    rua: {
+        type: DataTypes.STRING
+    },
+    bairro: {
+        type: DataTypes.STRING
+    },
+    cidade: {
+        type: DataTypes.STRING
+    },
+    estado: {
         type: DataTypes.STRING
     }
 })

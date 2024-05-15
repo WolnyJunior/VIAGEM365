@@ -12,6 +12,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
+      isAdmin: {
+        allowNull: true,
+        type: Sequelize.BOOLEAN,
+        defaultValue:false
+      },
       id: {
         allowNull: false,
         type: Sequelize.INTEGER,
@@ -28,7 +33,11 @@ module.exports = {
       },
       cpf: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        validate: {
+          isNumeric: true,
+          len: [11, 11]
+        }
       },
       email: {
         allowNull: false,
