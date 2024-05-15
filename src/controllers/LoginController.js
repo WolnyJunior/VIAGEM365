@@ -5,6 +5,17 @@ const { default: axios } = require("axios")
 class LoginController {
 
     async login(req, res) {
+
+        /*  #swagger.tags = ['Login']
+               #swagger.parameters['Login'] = {
+             in: 'body',
+             description: 'Fazer login de usuário para receber autenticação JWT',
+             schema: {
+                 $email: 'admin@email.com',
+                 $senha: 12345
+             }
+     } */
+
         try {
             const email = req.body.email
             const senha = req.body.senha
@@ -35,6 +46,21 @@ class LoginController {
     }
 
     async cadastrar(req, res) {
+        /*  #swagger.tags = ['Login-Cadastro']
+            #swagger.parameters['cadastro'] = {
+                in: 'body',
+                description: 'Rota de cadastro de usuários',
+                schema: {
+                    "nome":"Usuario 1",
+                    "sexo":"Gênero",
+                    "cpf":"12345678910",
+                    "email":"teste@email.com",
+                    "senha":12345,
+                    "data_nascimento":"1989-03-18",
+                    "cep_endereco":"93222020"
+                }
+        } */
+
         try {
             const nome = req.body.nome
             const sexo = req.body.sexo
@@ -45,7 +71,7 @@ class LoginController {
             const cep_endereco = req.body.cep_endereco
 
             if (!nome || !sexo || !cpf || !email || !senha || !data_nascimento || !cep_endereco) {
-                return res.status(400).json({ message: `Necessário preencher todos os dados.` })
+                return res.status(400).json({ message: `Necessário preencher todos os dados para cadastrar novo usuário.` })
             }
             if (!data_nascimento.match(/\d{4}-\d{2}-\d{2}/gm)) {
                 return res.status(400).json({ message: 'A data de nascimento é não está no formato correto' })
