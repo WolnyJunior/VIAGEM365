@@ -11,7 +11,7 @@ async function authDestinos(req, res, next) {
         if (!usuario) {
             return res.status(404).json({ message: `Não foi possível encontrar o usuário com ID informado.` })
         }
-        req.id_usuario = usuario.id
+        req.usuario = usuario
         next()
 
     } catch (error) {
