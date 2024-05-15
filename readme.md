@@ -13,7 +13,12 @@
 ### Nome do software
 Adventure-Driven Developer - Uma alusão ao POO
 ### Resumo
-Para a galera que curte aquela TRIP, o software proposto é uma plataforma de gestão de viagens, permitindo aos usuários cadastrarem destinos, compartilharem comentários e avaliações. Com intúito de ajudar na criação de uma comunidade onde viajantes possam divulgar suas experiências. Utiliza a autenticação JWT para a segurança, o sistema gerencia o cadastro de usuários, locais de viagem e seus detalhes. Além disso, oferece funcionalidades para listagem, edição e exclusão de destinos de forma segura e personalizada para cada usuário. Com documentação detalhada e integração com o Swagger, o software simplifica a organização e compartilhamento de informações de viagens.<br><br>
+Para a galera que curte aquela TRIP, o software proposto é uma plataforma de gestão de viagens, permitindo aos usuários cadastrarem destinos, compartilharem comentários e avaliações. Com intúito de ajudar na criação de uma comunidade onde viajantes possam divulgar suas experiências. Utiliza a autenticação JWT para a segurança, o sistema gerencia o cadastro de usuários, locais de viagem e seus detalhes. Além disso, oferece funcionalidades para listagem, edição e exclusão de destinos de forma segura e personalizada para cada usuário. Com documentação detalhada e integração com o Swagger, o software simplifica a organização e compartilhamento de informações de viagens.
+
+Na parte de desenvolvimento foram utilizadas duas APIs externas: <a href="https://viacep.com.br/">ViaCEP</a> e <a href="https://nominatim.openstreetmap.org/ui/search.html">OpenStreetMap</a> para fazer a requisições http e buscar os dados de endereço e localização de usuários e destinos.<br>
+O sistema já inicia com o usuário admin 
+Foram implementados middlewares de autenticação e uma lógica para verificar se o usuário autenticado é um admin, que permite fazer o CRUD de usuários. E que não pode ser atualizado ou removido.
+<br><br>
 [Índice](#índice)
 
 ## Melhorias
