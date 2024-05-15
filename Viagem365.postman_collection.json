@@ -18,7 +18,7 @@
 							"pm.environment.set(\"token\", jsonData.token);\r",
 							"\r",
 							"\r",
-							"//Tanto nome e ID que estão sendo retornados em cariáveis, são apenas para conferência durante a utilização do postman\r",
+							"//Tanto nome e ID que estão sendo retornados em variáveis, são apenas para conferência durante a utilização do postman\r",
 							"//## NÃO estão sendo usadas como variáveis globais\r",
 							"pm.environment.set(\"id_usuario\", jsonData.id);\r",
 							"\r",
@@ -112,7 +112,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\":\"usuario 6 - Só pra deletar\",\r\n    \"sexo\":\"masculino\",\r\n    \"cpf\":\"12345678926\",\r\n    \"email\":\"teste6@email.com\",\r\n    \"senha\":12345,\r\n    \"data_nascimento\":\"1989-03-18\",\r\n    \"cep_endereco\":\"93222020\"\r\n}",
+					"raw": "{\r\n    \"nome\":\"Novo Usuario\",\r\n    \"sexo\":\"Gênero\",\r\n    \"cpf\":\"12345678910\",\r\n    \"email\":\"teste@email.com\",\r\n    \"senha\":12345,\r\n    \"data_nascimento\":\"1989-03-18\",\r\n    \"cep_endereco\":\"93222020\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -154,7 +154,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/usuarios/5",
+					"raw": "http://localhost:3000/usuarios/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -162,7 +162,7 @@
 					"port": "3000",
 					"path": [
 						"usuarios",
-						"5"
+						"1"
 					]
 				}
 			},
@@ -188,7 +188,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/usuarios/5",
+					"raw": "http://localhost:3000/usuarios/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -196,7 +196,7 @@
 					"port": "3000",
 					"path": [
 						"usuarios",
-						"5"
+						"1"
 					]
 				}
 			},
@@ -318,7 +318,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\": \"Plinio Brasil Milano\",\r\n    \"descricao\": \"Avenida de Porto Alegre\",\r\n    \"cep_endereco\": \"93819-700\"\r\n}",
+					"raw": "{\r\n    \"nome\": \"Plinio Brasil Milano\",\r\n    \"descricao\": \"Avenida de Porto Alegre\",\r\n    \"cep_endereco\": \"38015-230\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -351,7 +351,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/destinos/1",
+					"raw": "http://localhost:3000/destinos/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -359,7 +359,7 @@
 					"port": "3000",
 					"path": [
 						"destinos",
-						"1"
+						"2"
 					]
 				}
 			},
